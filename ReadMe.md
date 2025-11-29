@@ -144,7 +144,7 @@ $ tree
 ### 6. Verify the proof
 
 ```console
-$ bb verify -p ./target/proof -k ./target/vk
+$ bb verify -p ./target/proof -k ./target/vk -i ./target/public_inputs
 
 Scheme is: ultra_honk, num threads: 16 (mem: 12.69 MiB)
 Proof verified successfully (mem: 15.73 MiB)
