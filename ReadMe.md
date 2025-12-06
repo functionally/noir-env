@@ -141,7 +141,14 @@ $ tree
 3 directories, 9 files
 ```
 
-### 6. Verify the proof
+### 6. View the public inputs
+
+```bash
+od -t x1 -w32 target/public_inputs
+```
+
+
+### 7. Verify the proof
 
 ```console
 $ bb verify -p ./target/proof -k ./target/vk -i ./target/public_inputs
