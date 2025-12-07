@@ -13,6 +13,22 @@
         "url": "https://github.com/AztecProtocol/aztec-packages/releases/download/v2.1.8/barretenberg-amd64-linux.tar.gz"
       }
     },
+    "bignum-paramgen-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1751836007,
+        "narHash": "sha256-Or9DeUZ4Q7qVcPwi+9qTT1pJr3Lxzf/BDPpnd14S4/o=",
+        "owner": "noir-lang",
+        "repo": "noir-bignum-paramgen",
+        "rev": "2dedc65b3e0b880c4bae646bb33f6e67c0fe0be1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noir-lang",
+        "repo": "noir-bignum-paramgen",
+        "type": "github"
+      }
+    },
     "co-snarks-src": {
       "flake": false,
       "locked": {
@@ -66,6 +82,7 @@
     "root": {
       "inputs": {
         "bb-bin": "bb-bin",
+        "bignum-paramgen-src": "bignum-paramgen-src",
         "co-snarks-src": "co-snarks-src",
         "nixpkgs": "nixpkgs",
         "noir-src": "noir-src"

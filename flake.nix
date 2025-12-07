@@ -14,9 +14,13 @@
       url = "github:TaceoLabs/co-snarks/co-noir-v0.7.0";
       flake = false;
     };
+    bignum-paramgen-src = {
+      url = "github:noir-lang/noir-bignum-paramgen";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, bb-bin, noir-src, co-snarks-src, ... }: 
+  outputs = { self, nixpkgs, bb-bin, noir-src, co-snarks-src, bignum-paramgen-src, ... }: 
   let
 
     system = "x86_64-linux";
@@ -163,6 +167,21 @@
       };
     });
 
+    bignum-paramgen = pkgs.rustPlatform.buildRustPackage (finalAttrs: {
+      pname = "noir-bignum-paramgen";
+      version = "main";
+      src = bignum-paramgen-src;
+      cargoHash = "sha256-Z1RE1nbICtaVC2/xMBDA5k6R3ADMijMWRedAwbvd4Pw=";
+      doCheck = false;
+      meta = {
+        description = "Parameter generation tool for noir-bignum";
+        mainProgram = "paramgen";
+        homepage = "https://github.com/noir-lang/noir-bignum-paramgen";
+        license = lib.licenses.asl20;
+        maintainers = with lib.maintainers; [ ];
+      };
+    });
+
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
@@ -170,8 +189,12 @@
         co-snarks
         noir
         bb
+        clang
+        llvmPackages.bintools
+        rustup
       ];
       shellHook = ''
+        export PATH="${bignum-paramgen}/bin:$PATH"
         echo "Entering Nix shell with Noir, Co-Noir, and Barretenberg ..."
         export PS1="\[\e[1;32m\][nix-shell:\w]$\[\e[m\] "
         nargo --version | grep -v 'git version hash'
